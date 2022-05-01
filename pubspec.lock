@@ -4,10 +4,10 @@ packages:
   alex_ui:
     dependency: "direct main"
     description:
-      path: "../alex_ui"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: alex_ui
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1-dev"
   async:
     dependency: transitive
     description:
