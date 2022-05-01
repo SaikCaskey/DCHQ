@@ -1,9 +1,11 @@
+import 'package:dchq/unitedstates/timer_state/timer_event.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:washington/washington.dart';
 
 import '../../unitedstates/counter_state/counter_event.dart';
 import '../../unitedstates/counter_state/counter_state.dart';
+import '../../unitedstates/timer_state/timer_state_provider.dart';
 
 class Controls extends StatelessWidget {
   const Controls({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class Controls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterState = context.watch<CounterState>();
+    final timerState = context.watch<TimerState>();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -61,6 +64,14 @@ class Controls extends StatelessWidget {
                       .dispatch(const CounterDividePressed(0))
                   : null,
               child: const Text('Divide by 0 (error)'),
+            ),
+            ElevatedButton(
+              onPressed: timerState.isLoading
+                  ? () => Washington.instance
+                      .dispatch(TimerStopPressed(timerState.value))
+                  : () => Washington.instance
+                      .dispatch(TimerStartPressed(counterState.value)),
+              child: Text(timerState.isLoading ? 'Stop' : 'StartTimer'),
             ),
           ],
         ),
