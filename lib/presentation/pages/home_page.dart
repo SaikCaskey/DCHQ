@@ -1,3 +1,4 @@
+import 'package:alex_ui/theme/app_theme.dart';
 import 'package:dchq/unitedstates/timer_state/timer_state_event.dart';
 import 'package:flutter/material.dart';
 import 'package:washington/washington.dart';
@@ -14,6 +15,10 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final styleData = AppTheme.of(context);
+    final colorScheme = styleData.colorScheme;
+    final textTheme = styleData.textTheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -38,9 +43,7 @@ class MyHomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      'Current value:',
-                    ),
+                    const Text('Current value:'),
                     StateBuilder<CounterState, int>(
                       builder: (context, state) {
                         final String text;
@@ -53,17 +56,15 @@ class MyHomePage extends StatelessWidget {
                         }
                         return Text(
                           text,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4
-                              ?.copyWith(
-                                  color: state.hasError ? Colors.red : null),
+                          style: textTheme.headlineLarge.copyWith(
+                            color: state.hasError
+                                ? colorScheme.error
+                                : colorScheme.onSurfaceVariant,
+                          ),
                         );
                       },
                     ),
-                    const Text(
-                      'Timer value:',
-                    ),
+                    const Text('Timer value:'),
                     StateBuilder<TimerState, int>(
                       builder: (context, state) {
                         final String text;
@@ -76,11 +77,11 @@ class MyHomePage extends StatelessWidget {
                         }
                         return Text(
                           text,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4
-                              ?.copyWith(
-                                  color: state.hasError ? Colors.red : null),
+                          style: textTheme.displayMedium.copyWith(
+                            color: state.isLoading
+                                ? colorScheme.onPrimaryContainer
+                                : colorScheme.onSurfaceVariant,
+                          ),
                         );
                       },
                     ),
