@@ -24,22 +24,26 @@ class TimerState extends UnitedState<int> {
   }
 
   void _onStartTimer(TimerStartPressed event) {
-    if (_timerSubscription?.isPaused == true) {
-      _timerSubscription?.resume();
+    if (event.duration <= 0) {
+      setState(0, isLoading: false);
     } else {
-      _timerSubscription?.cancel();
-      setState(event.duration, isLoading: true);
-      _timerSubscription = _timer.tick(ticks: event.duration).listen(
-        (duration) {
-          final hasFinished = duration <= 0;
-          if (hasFinished) {
-            dispatch(TimerLimitReached());
-          } else {
-            dispatch(TimerTicked(duration: event.duration));
-          }
-          setState(duration, isLoading: !hasFinished);
-        },
-      );
+      if (_timerSubscription?.isPaused == true) {
+        _timerSubscription?.resume();
+      } else {
+        _timerSubscription?.cancel();
+        setState(event.duration, isLoading: true);
+        _timerSubscription = _timer.tick(ticks: event.duration).listen(
+          (duration) {
+            final hasFinished = duration <= 0;
+            if (hasFinished) {
+              dispatch(TimerLimitReached());
+            } else {
+              dispatch(TimerTicked(duration: event.duration));
+            }
+            setState(duration, isLoading: !hasFinished);
+          },
+        );
+      }
     }
   }
 
