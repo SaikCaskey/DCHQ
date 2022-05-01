@@ -10,16 +10,17 @@ import 'presentation/pages/home_page.dart';
 class App extends StatelessWidget {
   const App({
     Key? key,
+    required this.themeMode,
     required this.lightThemeData,
     required this.darkThemeData,
   }) : super(key: key);
 
   final AppThemeData lightThemeData;
   final AppThemeData darkThemeData;
+  final ThemeMode themeMode;
 
   @override
   Widget build(BuildContext context) {
-    const themeMode = ThemeMode.system;
     return MultiStateProvider(
         stateProviders: [
           StateProvider<CounterState>(

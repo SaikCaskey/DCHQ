@@ -27,5 +27,9 @@ Future<void> main() async {
     AppThemeType.normal,
     isDark: true,
   );
-  runApp(App(lightThemeData: lightThemeData, darkThemeData: darkThemeData));
+  runApp(App(
+    lightThemeData: lightThemeData,
+    darkThemeData: darkThemeData,
+    themeMode: ThemeMode.system,
+  ));
 }
