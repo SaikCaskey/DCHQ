@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:washington/washington.dart';
 
-import 'controls_widget.dart';
-import 'counter_event.dart';
-import 'counter_state.dart';
-import 'counter_state_event.dart';
+import '../../unitedstates/counter_state/counter_event.dart';
+import '../../unitedstates/counter_state/counter_state.dart';
+import '../../unitedstates/counter_state/counter_state_event.dart';
+import '../widgets/controls_widget.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);

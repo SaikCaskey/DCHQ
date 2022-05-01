@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:washington/washington.dart';
 
-import 'counter_event.dart';
-import 'counter_state.dart';
+import '../../unitedstates/counter_state/counter_event.dart';
+import '../../unitedstates/counter_state/counter_state.dart';
 
 class Controls extends StatelessWidget {
   const Controls({Key? key}) : super(key: key);

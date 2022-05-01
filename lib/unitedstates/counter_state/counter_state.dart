@@ -6,6 +6,7 @@ import 'package:washington/washington.dart';
 import 'counter_event.dart';
 import 'counter_state_event.dart';
 
+/// Basically a Shared Bloc
 class CounterState extends UnitedState<int> {
   // You can use fields but they should always be final.
   // If it's part of the (changing) state, it should be part of the `value`.
@@ -13,15 +14,18 @@ class CounterState extends UnitedState<int> {
   final int upperLimit;
 
   bool get canIncrement => !isLoading && value < upperLimit;
+
   bool get canDecrement => !isLoading && value > lowerLimit;
+
   bool get canReset => !isLoading && value != 0;
+
   bool get canRandom => !isLoading;
 
   CounterState({
     required this.upperLimit,
     required this.lowerLimit,
   }) : super(0) {
-    // Add handlers to handle incomming events.
+    // Add handlers to handle incoming events.
     // Pro tip: use tear-offs to get a nice clean list of handlers.
     addHandler<CounterIncrementPressed>(_increment);
     addHandler<CounterDecrementPressed>(_decrement);
